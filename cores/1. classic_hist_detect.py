@@ -6,8 +6,8 @@ from tqdm import tqdm
 import os
 
 PATH = '/Users/vityshha/Desktop/Мегакариоциты (клетки и ядра)/Мегакариоциты (только клетки)/'
-PATH_SAVE = './classic_hist_detect_out'
 
+PATH_SAVE = './classic_hist_detect_out'
 NEED_SAVE_RESULTS = False
 NEED_SHOW_RESULT = True
 
@@ -47,7 +47,6 @@ for file_path in tqdm(glob.glob(PATH + '/*.tif'), desc="Processing images"):
     for contour in contours:
         area = cv2.contourArea(contour)
         if area > MIN_AREA:
-            # print(area)
             cv2.drawContours(image, [contour], -1, (0, 255, 0), 2)
 
     if NEED_SAVE_RESULTS:
