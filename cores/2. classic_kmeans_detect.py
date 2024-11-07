@@ -72,8 +72,8 @@ for file_path in tqdm(glob.glob(PATH + '/*.tif'), desc="Processing images"):
     if NEED_SHOW_RESULT:
 
         # Пытаемся загрузить основное ядро и альтернативные версии с приписками "(1)" и "(2)"
-        file_path_core = file_path.replace('_S', '_N')
-        img_core = cv2.imread(PATH + f"16_1194_HE_1 ђ•£®+_N24.tif")
+        file_path_core = PATH_CORES + file_path.split('/')[-1].replace('_S', '_N')
+        img_core = cv2.imread(file_path_core)
 
         file_path_core_1 = file_path_core.replace('.tif', '(1).tif')
         file_path_core_2 = file_path_core.replace('.tif', '(2).tif')
