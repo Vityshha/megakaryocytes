@@ -12,13 +12,14 @@ PATH_CORES_CONTOURS = './cores_contours/'
 
 PATH_SAVE = './classic_kmeans_detect_out'
 NEED_SAVE_RESULTS = False
-NEED_SHOW_RESULT = True
-NEED_TEST = False
+NEED_SHOW_RESULT = False
+NEED_TEST = True
 
 MIN_AREA = 100
 MAX_AREA_COEFF = 0.9
 total_dice, total_iou = 0, 0
 processed_images = 0
+fatal_images_count = 0
 CLASSES = 3
 NEED_USE_MEAN_SHIFT = True
 
@@ -88,7 +89,8 @@ for file_path in tqdm(glob.glob(PATH + '/*.tif')):
         if true_mask is not None:
             dice_score, iou_score = calculate_metrics(pred_mask, true_mask)
             if dice_score == 0 or iou_score == 0:
-                continue
+                fatal_images_count += 1
+                # continue
             total_dice += dice_score
             total_iou += iou_score
             processed_images += 1
@@ -124,3 +126,4 @@ if NEED_TEST:
         mean_iou = total_iou / processed_images
         print(f"\nСредний Dice Score: {mean_dice:.4f}")
         print(f"Средний IoU Score: {mean_iou:.4f}")
+        print(f'Неудачных: {fatal_images_count}')

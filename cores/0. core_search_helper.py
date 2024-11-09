@@ -10,15 +10,15 @@ PATH_CORES = '/Users/vityshha/Desktop/Мегакариоциты (клетки �
 
 PATH_SAVE = './cores_contours/'
 
-NEED_SHOW_RESULT = True
-NEED_SAVE_RESULT = False
+NEED_SHOW_RESULT = False
+NEED_SAVE_RESULT = True
 
 os.makedirs(PATH_SAVE, exist_ok=True)
 
 # Функция для поиска и выделения контуров ядер на изображении клетки
 def find_core_contour_in_cell(cell_image, core_template, offset=(0, 0)):
     core_gray = cv2.cvtColor(core_template, cv2.COLOR_BGR2GRAY)
-    _, core_binary = cv2.threshold(core_gray, 250, 255, cv2.THRESH_BINARY_INV)
+    _, core_binary = cv2.threshold(core_gray, 240, 255, cv2.THRESH_BINARY_INV)
 
     contours, _ = cv2.findContours(core_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -79,7 +79,7 @@ for file_path in tqdm(glob.glob(PATH + '/*.tif'), desc="Processing images"):
     cell_image = cv2.imread(file_path)
     cell_image = cv2.cvtColor(cell_image, cv2.COLOR_BGR2RGB)
 
-    core_path_base = PATH_CORES + file_path.split('/')[-1].replace('_S', '_N').replace('.tif', '')
+    core_path_base = PATH_CORES + file_path.split('/')[-1].replace('S', 'N').replace('.tif', '')
 
     result_image, full_mask = process_image_with_cores(cell_image, core_path_base, image_name)
 
