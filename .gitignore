@@ -28,6 +28,8 @@ share/python-wheels/
 .DS_Store
 *.egg
 *.png
+*.tif
+*.pth
 MANIFEST
 
 # PyInstaller

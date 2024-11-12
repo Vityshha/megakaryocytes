@@ -12,7 +12,7 @@ PATH_CORES_CONTOURS = './cores_contours/'
 
 PATH_SAVE = './classic_kmeans_detect_out'
 NEED_SAVE_RESULTS = False
-NEED_SHOW_RESULT = False
+NEED_SHOW_RESULT = True
 NEED_TEST = True
 
 MIN_AREA = 100
@@ -82,7 +82,7 @@ for file_path in tqdm(glob.glob(PATH + '/*.tif')):
             cv2.drawContours(image_with_contours, [contour], -1, (255, 0, 0), 1)
 
     # Загрузка эталонной разметки
-    true_mask_path = PATH_CORES_CONTOURS + image_name + '_contours.png'
+    true_mask_path = PATH_CORES_CONTOURS + image_name + '.png'
     true_mask = cv2.imread(true_mask_path, cv2.IMREAD_GRAYSCALE)
 
     if NEED_TEST:

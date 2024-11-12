@@ -67,7 +67,7 @@ def process_image_with_cores(cell_image, core_path_base, image_name):
             else:
                 break
 
-    contour_save_path = os.path.join(PATH_SAVE, f"{image_name}_contours.png")
+    contour_save_path = os.path.join(PATH_SAVE, f"{image_name}.png")
     cv2.imwrite(contour_save_path, full_mask)
 
     return result_image, full_mask
